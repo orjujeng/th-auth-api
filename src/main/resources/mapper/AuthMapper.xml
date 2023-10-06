@@ -1,0 +1,51 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orjujeng.auth.mapper.AuthMapper">
+<resultMap id="AuthAccessMemberInfo" type="com.orjujeng.auth.entity.AuthAccessMemberInfo">
+        <!--手动指定字段与实体属性的映射关系
+            column: 数据表的字段名称
+            property：实体的属性名称
+        -->
+        <id column="id" property="aid"></id>
+        <result column="member_id" property="memberId"></result>
+        <result column="auth_access" property="authAccess"></result>
+        <result column="profile_access" property="profileAccess"></result>
+        <result column="timesheet_access" property="timesheetAccess"></result>
+        <result column="request_access" property="requestAccess"></result>
+        <result column="mid" property="memberInfo.id"></result>
+        <result column="name_zh" property="memberInfo.nameZh"></result>
+        <result column="name_cn" property="memberInfo.nameCn"></result>
+        <result column="account_num" property="memberInfo.accountNum"></result>
+        <result column="manager_id" property="memberInfo.managerId"></result>
+        <result column="perm" property="memberInfo.perm"></result>
+        <result column="auth_of_backend" property="memberInfo.authOfBackend"></result>
+        <result column="join_date" property="memberInfo.joinDate"></result>
+        <result column="expired_date" property="memberInfo.expiredDate"></result>
+        <result column="last_updated_date" property="memberInfo.lastUpdatedDate"></result>
+        <result column="delete_flag" property="memberInfo.deleteFlag"></result>
+    </resultMap>
+    
+	<select id="checkpasswordByMemberId" resultType="com.orjujeng.auth.entity.AuthInfo">
+  		SELECT * FROM auth_info 
+  		<where>
+  		<if test = "member_id!=null">
+  		member_id  = ${member_id} 
+  		 </if>
+		</where>
+ 	</select>
+ 	
+ 	<select id="checkAuthAccess" resultType="com.orjujeng.auth.entity.AuthAccessInfo">
+  		SELECT * FROM auth_access_info 
+  		where member_id  = ${member_id};
+ 	</select>
+ 	
+ 	<select id="getAllAuthAccessInfo" resultMap="AuthAccessMemberInfo">
+  		SELECT aai.*,mi.id as mid,mi.name_zh,mi.name_cn,mi.account_num,mi.manager_id,mi.perm,mi.auth_of_backend,mi.join_date,mi.expired_date,mi.last_updated_date,mi.delete_flag FROM auth_access_info as aai
+  		left join PROFILE_API.member_info as mi
+  		on aai.member_id = mi.id;
+ 	</select>
+ 	
+ 	 
+ 	
+</mapper>
