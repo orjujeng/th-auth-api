@@ -46,6 +46,23 @@
   		on aai.member_id = mi.id;
  	</select>
  	
- 	 
+ 	 <update id="updateAuthAccessInfo" parameterType="com.orjujeng.auth.entity.AuthUpdate">
+  update auth_access_info
+  <set> 
+  		<if test="type=='authAccess'">
+            auth_access = #{value}
+        </if>
+        <if test="type=='profileAccess'">
+            profile_access= #{value}
+        </if>
+        <if test="type=='requestAccess'">
+            request_access = #{value}
+        </if>
+        <if test="type=='timesheetAccess'">
+            timesheet_access= #{value}
+        </if>
+        </set> 
+        where member_id = #{memberId}
+ </update>
  	
 </mapper>

@@ -2,6 +2,7 @@ package com.orjujeng.auth.server;
 
 import org.springframework.stereotype.Service;
 
+import com.orjujeng.auth.entity.AuthUpdate;
 import com.orjujeng.auth.entity.LoginInfo;
 import com.orjujeng.auth.utils.Result;
 @Service
@@ -12,5 +13,9 @@ public interface AuthService {
 	void checkAuth(Integer memberId);
 
 	Result getAuthList();
+
+	Result updateAuthOfBackend(AuthUpdate authUpdate);
+
+	Result updateAccessInfo(AuthUpdate authUpdate);
 
 }

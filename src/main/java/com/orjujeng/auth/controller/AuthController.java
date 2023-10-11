@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.orjujeng.auth.entity.AuthUpdate;
 import com.orjujeng.auth.entity.LoginInfo;
 import com.orjujeng.auth.server.AuthService;
 import com.orjujeng.auth.utils.Result;
+import com.orjujeng.auth.utils.ResultCode;
 
 @RequestMapping("/auth")
 @RestController
@@ -26,5 +28,16 @@ public class AuthController {
 		authService.checkAuth(memberId);
 		Result result = authService.getAuthList();
 		return result;
+	}
+	
+	@RequestMapping("/updateAuthInfo")
+	public Result updateAuthInfo(@RequestBody AuthUpdate authUpdate) {
+		if(authUpdate.getType()!=null & authUpdate.getType().equals("authOfBackend")) {
+			Result result = authService.updateAuthOfBackend(authUpdate);
+			return result;
+		}else {
+			Result result = authService.updateAccessInfo(authUpdate);
+			return result;
+		}
 	}
 }

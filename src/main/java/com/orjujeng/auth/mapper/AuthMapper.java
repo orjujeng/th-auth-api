@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.orjujeng.auth.entity.AuthAccessInfo;
 import com.orjujeng.auth.entity.AuthAccessMemberInfo;
 import com.orjujeng.auth.entity.AuthInfo;
+import com.orjujeng.auth.entity.AuthUpdate;
 
 @Mapper
 public interface AuthMapper {
@@ -16,5 +17,7 @@ public interface AuthMapper {
 	AuthAccessInfo checkAuthAccess(Integer memberId);
 
 	List<AuthAccessMemberInfo> getAllAuthAccessInfo();
+
+	void updateAuthAccessInfo(AuthUpdate authUpdate);
 
 }
