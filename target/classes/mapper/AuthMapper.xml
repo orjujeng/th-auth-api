@@ -64,5 +64,10 @@
         </set> 
         where member_id = #{memberId}
  </update>
- 	
+ 
+ 	<select id="checkAccessAccordingToType" resultType="com.orjujeng.auth.entity.AuthCheckResult">
+  		SELECT ${type} as result FROM auth_access_info 
+  		where member_id  = ${memberId};
+ 	</select>
+
 </mapper>

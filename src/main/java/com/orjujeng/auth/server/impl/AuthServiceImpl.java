@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.orjujeng.auth.entity.AuthAccessInfo;
 import com.orjujeng.auth.entity.AuthAccessMemberInfo;
+import com.orjujeng.auth.entity.AuthCheckResult;
 import com.orjujeng.auth.entity.AuthInfo;
 import com.orjujeng.auth.entity.AuthUpdate;
 import com.orjujeng.auth.entity.LoginInfo;
@@ -94,6 +95,15 @@ public class AuthServiceImpl implements AuthService {
 	@CacheEvict(value = "AUTH",key = "'getAuthList'")
 	public Result updateAccessInfo(AuthUpdate authUpdate) {
 		authMapper.updateAuthAccessInfo(authUpdate);
+		return Result.success(null);
+	}
+
+	@Override
+	public Result checkAuthOfAll(Integer memberId, String type) {
+		AuthCheckResult result = authMapper.checkAccessAccordingToType(memberId,type);
+		if(result==null || result.getResult().equals("N")) {
+			throw new AuthAccessDeniedException("Access Denied");
+		}
 		return Result.success(null);
 	}
 

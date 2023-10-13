@@ -3,9 +3,11 @@ package com.orjujeng.auth.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.orjujeng.auth.entity.AuthAccessInfo;
 import com.orjujeng.auth.entity.AuthAccessMemberInfo;
+import com.orjujeng.auth.entity.AuthCheckResult;
 import com.orjujeng.auth.entity.AuthInfo;
 import com.orjujeng.auth.entity.AuthUpdate;
 
@@ -19,5 +21,7 @@ public interface AuthMapper {
 	List<AuthAccessMemberInfo> getAllAuthAccessInfo();
 
 	void updateAuthAccessInfo(AuthUpdate authUpdate);
+
+	AuthCheckResult checkAccessAccordingToType(@Param("memberId")Integer memberId,@Param("type") String type);
 
 }

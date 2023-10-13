@@ -18,4 +18,6 @@ public interface AuthService {
 
 	Result updateAccessInfo(AuthUpdate authUpdate);
 
+	Result checkAuthOfAll(Integer memberId, String type);
+
 }

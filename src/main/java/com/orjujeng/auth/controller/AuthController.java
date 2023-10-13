@@ -17,27 +17,34 @@ import com.orjujeng.auth.utils.ResultCode;
 public class AuthController {
 	@Autowired
 	AuthService authService;
+
 	@RequestMapping("/vaildLogin")
 	public Result vaildLogin(@RequestBody LoginInfo logininfo) {
 		Result result = authService.vaildLoginInfo(logininfo);
 		return result;
 	}
-	
+
 	@RequestMapping("/getAuthList")
 	public Result getAuthList(@RequestParam(required = true) Integer memberId) {
 		authService.checkAuth(memberId);
 		Result result = authService.getAuthList();
 		return result;
 	}
-	
+
 	@RequestMapping("/updateAuthInfo")
 	public Result updateAuthInfo(@RequestBody AuthUpdate authUpdate) {
-		if(authUpdate.getType()!=null & authUpdate.getType().equals("authOfBackend")) {
+		if (authUpdate.getType() != null & authUpdate.getType().equals("authOfBackend")) {
 			Result result = authService.updateAuthOfBackend(authUpdate);
 			return result;
-		}else {
+		} else {
 			Result result = authService.updateAccessInfo(authUpdate);
 			return result;
 		}
+	}
+
+	@RequestMapping("/check")
+	public Result checkAuthOfAll(@RequestParam(required = true) Integer memberId,@RequestParam(required = true) String type) {
+		Result result= authService.checkAuthOfAll(memberId,type);
+		return result;
 	}
 }
