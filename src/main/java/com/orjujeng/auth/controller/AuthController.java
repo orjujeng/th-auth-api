@@ -47,4 +47,10 @@ public class AuthController {
 		Result result= authService.checkAuthOfAll(memberId,type);
 		return result;
 	}
+	
+	@RequestMapping("/addAuthInfo")
+	public Result addAuthInfo(@RequestParam(required = true) Integer memberId,@RequestParam(required = true) String accountNum) {
+		Result result= authService.addNewAuthInfo(memberId,accountNum);
+		return result;
+	}
 }

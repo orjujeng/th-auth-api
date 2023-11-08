@@ -69,5 +69,17 @@
   		SELECT ${type} as result FROM auth_access_info 
   		where member_id  = ${memberId};
  	</select>
+ 	
+ 	
+ 	<insert id="addAuthAccessInfo" useGeneratedKeys="true">
+    insert into auth_access_info(member_id,auth_access,profile_access,timesheet_access,request_access) values 
+    (${memberId},'N','N','N','N');
+ 	</insert>
+ 	
+ 	
+ 	<insert id="addAuthInfo" useGeneratedKeys="true">
+    insert into auth_info(member_id,account_num,password,termination,last_updated_date) values 
+    (${memberId},#{accountNum},'e1a7c4358706c6202e95d0356b9d7672','N',sysdate());
+ 	</insert>
 
 </mapper>

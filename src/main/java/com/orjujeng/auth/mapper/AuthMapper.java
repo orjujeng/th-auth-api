@@ -24,4 +24,8 @@ public interface AuthMapper {
 
 	AuthCheckResult checkAccessAccordingToType(@Param("memberId")Integer memberId,@Param("type") String type);
 
+	void addAuthAccessInfo(@Param("memberId") Integer memberId);
+
+	void addAuthInfo(@Param("memberId") Integer memberId,@Param("accountNum")String accountNum);
+
 }

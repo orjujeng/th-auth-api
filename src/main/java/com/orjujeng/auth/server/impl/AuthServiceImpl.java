@@ -81,6 +81,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
+	@Transactional
 	@CacheEvict(value = "AUTH",key = "'getAuthList'")
 	public Result updateAuthOfBackend(AuthUpdate authUpdate) {
 		MemberInfo input = new MemberInfo();
@@ -104,6 +105,15 @@ public class AuthServiceImpl implements AuthService {
 		if(result==null || result.getResult().equals("N")) {
 			throw new AuthAccessDeniedException("Access Denied");
 		}
+		return Result.success(null);
+	}
+
+	@Override
+	@Transactional
+	@CacheEvict(value = "AUTH",key = "'getAuthList'")
+	public Result addNewAuthInfo(Integer memberId, String accountNum) {
+		authMapper.addAuthAccessInfo(memberId);
+		authMapper.addAuthInfo(memberId,accountNum);
 		return Result.success(null);
 	}
 

@@ -20,4 +20,6 @@ public interface AuthService {
 
 	Result checkAuthOfAll(Integer memberId, String type);
 
+	Result addNewAuthInfo(Integer memberId, String accountNum);
+
 }
