@@ -28,4 +28,8 @@ public interface AuthMapper {
 
 	void addAuthInfo(@Param("memberId") Integer memberId,@Param("accountNum")String accountNum);
 
+	void deleteAuthAccessInfo(Integer memberId);
+
+	void deleteAuthInfo(@Param("memberId") Integer memberId,@Param("accountNum") String accountNum);
+
 }

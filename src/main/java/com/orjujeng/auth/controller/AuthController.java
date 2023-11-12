@@ -53,4 +53,10 @@ public class AuthController {
 		Result result= authService.addNewAuthInfo(memberId,accountNum);
 		return result;
 	}
+	
+	@RequestMapping("/deleteAuthInfo")
+	public Result deleteAuthInfo(@RequestParam(required = true) Integer memberId,@RequestParam(required = true) String accountNum) {
+		Result result= authService.deleteAuthInfo(memberId,accountNum);
+		return result;
+	}
 }

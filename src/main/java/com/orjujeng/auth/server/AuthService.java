@@ -22,4 +22,6 @@ public interface AuthService {
 
 	Result addNewAuthInfo(Integer memberId, String accountNum);
 
+	Result deleteAuthInfo(Integer memberId, String accountNum);
+
 }

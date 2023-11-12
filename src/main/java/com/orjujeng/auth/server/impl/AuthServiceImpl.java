@@ -117,4 +117,13 @@ public class AuthServiceImpl implements AuthService {
 		return Result.success(null);
 	}
 
+	@Override
+	@Transactional
+	@CacheEvict(value = "AUTH",key = "'getAuthList'")
+	public Result deleteAuthInfo(Integer memberId, String accountNum) {
+		authMapper.deleteAuthAccessInfo(memberId);
+		authMapper.deleteAuthInfo(memberId,accountNum);
+		return Result.success(null);
+	}
+
 }
