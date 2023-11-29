@@ -48,17 +48,17 @@ public class AuthServiceImpl implements AuthService {
 			Date now = new Date();
 			Boolean isExpired = expiredDate.before(now);
 			if(deleteFlag != null && deleteFlag.equals("N") && isExpired == false) {
-				if(authOfBackend!= null && authOfBackend.equals("Y")) {
-					Integer memberId = memberInfo.get(0).getId();
-					AuthInfo authInfo= authMapper.checkpasswordByMemberId(memberId);
-					String encodePw = DigestUtils.md5Hex(logininfo.getPassword());
-					if(authInfo.getPassword() !=null && authInfo.getPassword().equals(encodePw)) {
+				Integer memberId = memberInfo.get(0).getId();
+				AuthInfo authInfo= authMapper.checkpasswordByMemberId(memberId);
+				String encodePw = DigestUtils.md5Hex(logininfo==null?null:logininfo.getPassword());
+				if(authInfo.getPassword() !=null && authInfo.getPassword().equals(encodePw)) {
+					if(authOfBackend!= null && authOfBackend.equals("Y")) {
 						return Result.success(memberInfo.get(0));
 					}else {
-						return Result.error(ResultCode.PASSWORD_ERROR.code, "Password Error", null);
-					}
+						return Result.error(ResultCode.NO_ACCESS_USE_TH.code,"No Access To Login TH Tool",memberInfo.get(0));
+					}	
 				}else {
-					throw new AccessDenideException("Access Denide");
+					return Result.error(ResultCode.PASSWORD_ERROR.code, "Password Error", null);
 				}
 			}else {
 				throw new AccessDenideException("Access Denide");

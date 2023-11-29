@@ -43,6 +43,7 @@ public class AuthController {
 	}
 
 	@RequestMapping("/check")
+	//check auth
 	public Result checkAuthOfAll(@RequestParam(required = true) Integer memberId,@RequestParam(required = true) String type) {
 		Result result= authService.checkAuthOfAll(memberId,type);
 		return result;
