@@ -92,7 +92,12 @@
     		<groupId>org.springframework.cloud</groupId>
     		<artifactId>spring-cloud-starter-loadbalancer</artifactId>
 		</dependency>
-		
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+    		<groupId>commons-codec</groupId>
+    		<artifactId>commons-codec</artifactId>
+   			 <version>1.11</version>
+		</dependency>
 		<dependency>
           <groupId>com.alibaba</groupId>
           <artifactId>fastjson</artifactId>

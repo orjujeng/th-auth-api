@@ -12,7 +12,7 @@ import com.orjujeng.auth.entity.MemberInfo;
 import com.orjujeng.auth.utils.Result;
 
 
-@FeignClient("TH-ProfileApi")
+@FeignClient(name="th-timesheet-api",url="${lb_url}")
 public interface ProfileApiFeignService {
 	@GetMapping("/profile/member/getMember")
 	public Result getMemberInfoByAccountNum(@RequestParam(required = false, value = "accountNum") String accountNum);
